@@ -5,6 +5,7 @@ const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
 
+const create = require("./createHTML");
 
 const teamRoster = {
     allEmployees: [],
@@ -16,8 +17,6 @@ const teamRoster = {
 getEmployeeInfo();
 
 async function getEmployeeInfo() {
-
-
     // Basic Employee Questions ////////////////////////////////////////////
     let { name, id, email, role } =
         await inquirer.prompt([
@@ -43,17 +42,14 @@ async function getEmployeeInfo() {
                 name: "role",
             }
         ])
-
             .catch(function (error) {
                 console.log(error);
-                console.log("error catch 1");
             })
 
-    // push new hire to newHire array //
+    // push new hire to teamRoster array ////////////////////////////////////////
     let newHire = new Employee(name, id, email, role);
     teamRoster.allEmployees.push(newHire);
     console.log(teamRoster);
-
 
     // Manager specific questions.////////////////////////////////////////////////
     if (role == "Manager") {
@@ -68,14 +64,12 @@ async function getEmployeeInfo() {
             .then(function (answers) {
                 const officeNumber = answers.officeNumber;
                 console.log("office number is " + officeNumber);
-                const newManager = new Manager(name, id, email, role, officeNumber);
+                const newManager = new Manager(name, id, email, officeNumber);
                 teamRoster.managers.push(newManager);
                 console.log(teamRoster);
             })
-
             .catch(function (error) {
                 console.log(error);
-                console.log("error catch 2");
             });
     }
 
@@ -90,15 +84,14 @@ async function getEmployeeInfo() {
         ]
         await inquirer.prompt(engineerQuestions)
             .then(function (answers) {
-                let username = answers.username;
+                const username = answers.username;
                 console.log("user name is " + username);
-                let newEngineer = new Engineer(name, id, email, role, username);
+                const newEngineer = new Engineer(name, id, email, username);
                 teamRoster.engineers.push(newEngineer);
+                console.log(teamRoster);
             })
-
             .catch(function (error) {
                 console.log(error);
-                console.log("error catch 3");
             });
     }
 
@@ -115,25 +108,82 @@ async function getEmployeeInfo() {
             .then(function (answers) {
                 let school = answers.school;
                 console.log(school + " Successfully added");
-                let newIntern = new Intern(name, id, email, role, school);
+                let newIntern = new Intern(name, id, email, school);
                 teamRoster.interns.push(newIntern);
             })
-
             .catch(function (error) {
                 console.log(error);
-                console.log("error catch 4");
             });
+    }
+    // Add another employee prompt. /////////////////////////////////////////////////
+    const addAnotherEmployee = [
+        {
+            type: "list",
+            message: "Would you like to add another employee?",
+            choices: ["yes", "no"],
+            name: "empAdd",
+        }
+    ]
+    await inquirer.prompt(addAnotherEmployee)
+        .then(function (answers) {
+            let empAdd = answers.empAdd;
+            console.log(empAdd + "this is the answer to adding employee");
+            if (empAdd == "no") {
+                addEmp = false;
+                console.log("stop here and build html");
+                buildHTML();
+            } else {
+                addEmp = true;
+                getEmployeeInfo();
+            }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 
-
-
-    };
 
     checkRoster();
-
-
+    console.log("This is our test " + teamRoster);
 }
 
-// Add another employee prompt. /////////////////////////////////////////////////
+// Build out HTML file ////////////////////////////////////////////////////////////////////////
+function buildHTML() {
+
+    let HTML = create.createFileHead();
+
+    let header = create.createHeader();
+
+    HTML += header;
+
+    teamRoster.managers.forEach(element => {
+        console.log(JSON.stringify(element));
+            let managerCard = create.createManager(element);
+            HTML += managerCard;
+    });
+
+    teamRoster.interns.forEach(element => {
+        console.log(JSON.stringify(element));
+            let internCard = create.createIntern(element);
+            HTML += internCard;
+    });
+
+    teamRoster.engineers.forEach(element => {
+        console.log(JSON.stringify(element));
+        let engineerCard = create.createManager(element);
+        HTML = HTML + engineerCard;
+    })
+
+        // Create new HTML file with employee information.
+        
+            fs.writeFile('./output/team.html', HTML, 'utf8', (err) => {
+                if (err) throw err;
+                console.log("Team Roster has been created!!!");
+            });
+        
+}
+
+
+
 
 
 function checkRoster() {
