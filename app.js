@@ -79,14 +79,14 @@ async function getEmployeeInfo() {
             {
                 type: "input",
                 message: "Enter engineer's GitHub Username",
-                name: "username",
+                name: "github",
             }
         ]
         await inquirer.prompt(engineerQuestions)
             .then(function (answers) {
-                const username = answers.username;
-                console.log("user name is " + username);
-                const newEngineer = new Engineer(name, id, email, username);
+                const github = answers.github;
+                console.log("user name is " + github);
+                const newEngineer = new Engineer(name, id, email, github);
                 teamRoster.engineers.push(newEngineer);
                 console.log(teamRoster);
             })

@@ -66,7 +66,7 @@ function createEngineer(Engineer) {
     <ul class="list-group list-group-flush p-4">
       <li class="list-group-item">ID:<span class = "text-primary"> ${Engineer.id}</span></li>
       <li class="list-group-item">Email:<span class = "text-primary"> ${Engineer.email}</span></li>
-      <li class="list-group-item">GitHub User ID:<span class = "text-primary"> ${Engineer.username}</span></li>
+      <li class="list-group-item">GitHub User ID:<span class = "text-primary"> ${Engineer.github}</span></li>
     </ul>
     </div>
   </div>`
