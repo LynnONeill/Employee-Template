@@ -29,14 +29,14 @@ function createHeader() {
 
 function createManager(Manager) {
     return `<div id="manager" class="card float-left m-4" style="width: 18rem;">
-    <div class="card-body bg-info text-white">
+    <div class="card-body bg-info text-white rounded">
       <h5 class="card-title">${Manager.name}</h5>
       <p class="card-text"><span><i class="fas fa-mug-hot p-2"></i></span>Manager</p>
     </div>
     <ul class="list-group list-group-flush p-4">
-      <li class="list-group-item">ID: ${Manager.id}</li>
-      <li class="list-group-item">Email: ${Manager.email}</li>
-      <li class="list-group-item">Office Number: ${Manager.officeNumber}</li>
+      <li class="list-group-item">ID:<span class = "text-primary"> ${Manager.id}</span></li>
+      <li class="list-group-item">Email:<span class = "text-primary"> ${Manager.email}</span></li>
+      <li class="list-group-item">Office Number:<span class = "text-primary"> ${Manager.officeNumber}</span></li>
     </ul>
     </div>
   </div>`
@@ -44,14 +44,14 @@ function createManager(Manager) {
 
 function createIntern(Intern) {
     return `<div id="intern" class="card float-left m-4" style="width: 18rem;">
-    <div class="card-body bg-info text-white">
+    <div class="card-body bg-info text-white rounded">
       <h5 class="card-title">${Intern.name}</h5>
       <p class="card-text"><span><i class="fas fa-user-graduate p-2"></i></span>Intern</p>
     </div>
     <ul class="list-group list-group-flush p-4">
-      <li class="list-group-item">ID: ${Intern.id}</li>
-      <li class="list-group-item">Email: ${Intern.email}</li>
-      <li class="list-group-item">School: ${Intern.school}</li>
+      <li class="list-group-item">ID:<span class = "text-primary"> ${Intern.id} </span></li>
+      <li class="list-group-item">Email:<span class = "text-primary"> ${Intern.email}</span></li>
+      <li class="list-group-item">School:<span class = "text-primary"> ${Intern.school}</span></li>
     </ul>
     </div>
   </div>`
@@ -59,14 +59,14 @@ function createIntern(Intern) {
 
 function createEngineer(Engineer) {
     return `<div id="engineer" class="card float-left m-4" style="width: 18rem;">
-    <div class="card-body bg-info text-white">
+    <div class="card-body bg-info text-white rounded">
       <h5 class="card-title">${Engineer.name}</h5>
-      <p class="card-text"><span><i class="fab fa-github p-2"></i></span>Intern</p>
+      <p class="card-text"><span><i class="fab fa-github p-2"></i></span>Engineer</p>
     </div>
     <ul class="list-group list-group-flush p-4">
-      <li class="list-group-item">ID: ${Engineer.id}</li>
-      <li class="list-group-item">Email: ${Engineer.email}</li>
-      <li class="list-group-item">GitHub User ID: ${Intern.github}</li>
+      <li class="list-group-item">ID:<span class = "text-primary"> ${Engineer.id}</span></li>
+      <li class="list-group-item">Email:<span class = "text-primary"> ${Engineer.email}</span></li>
+      <li class="list-group-item">GitHub User ID:<span class = "text-primary"> ${Engineer.username}</span></li>
     </ul>
     </div>
   </div>`

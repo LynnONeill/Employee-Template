@@ -168,8 +168,8 @@ function buildHTML() {
     });
 
     teamRoster.engineers.forEach(element => {
-        console.log(JSON.stringify(element));
-        let engineerCard = create.createManager(element);
+        console.log(JSON.stringify("for each test . " + element));
+        let engineerCard = create.createEngineer(element);
         HTML = HTML + engineerCard;
     })
 
@@ -181,9 +181,6 @@ function buildHTML() {
             });
         
 }
-
-
-
 
 
 function checkRoster() {
